@@ -5,9 +5,9 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build:dist": "npm run clean && tsc --project component --outDir ./dist && cp package.json ./dist",
+    "build:dist": "npm run clean && tsc --project src/lib --outDir ./dist && cp package.json ./dist",
     "clean": "rm -rf ./dist",
-    "dev": "webpack serve"
+    "dev": "webpack serve --config ./src/app/webpack.config.js"
   },
   "author": "Julien Graziano <julien@graziano.fr>",
   "license": "ISC",

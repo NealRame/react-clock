@@ -15,7 +15,7 @@
     "**/*.test.ts"
   ],
   "include": [
-    "component",
-    "test-app"
+    "./index.ts",
+    "./app.tsx",
   ]
 }
