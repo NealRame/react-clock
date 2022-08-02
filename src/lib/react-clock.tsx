@@ -4,18 +4,115 @@ interface ClockProps {
     offset?: number,
     width?: number,
     height?: number,
+
+    backgroundColor?: string,
+    borderColor?: string,
+    borderThickness?: number,
+
     padding?: number,
+
+    hourHandColor?: string,
+    hourHandRadius?: number,
+    hourHandSize?: number,
+    hourHandTailSize?: number,
+    hourHandThickness?: number,
+
+    hourMarkerColor?: string,
+    hourMarkerSize?: number,
+    hourMarkerThickness?: number,
+
+    minuteHandColor?: string,
+    minuteHandRadius?: number,
+    minuteHandSize?: number,
+    minuteHandTailSize?: number,
+    minuteHandThickness?: number,
+
+    minuteMarkerColor?: string,
+    minuteMarkerSize?: number,
+    minuteMarkerThickness?: number,
+
+    secondHandColor?: string,
+    secondHandRadius?: number,
+    secondHandSize?: number,
+    secondHandTailSize?: number,
+    secondHandThickness?: number,
 }
 
 const clockDefaultProps: ClockProps = {
     offset: 0,
     height: 200,
     width: 200,
+    
     padding: 6,
+    
+    backgroundColor: "white",
+    borderColor: "black",
+    borderThickness: 4,
+    
+    hourHandColor: "black",
+    hourHandRadius: 8,
+    hourHandSize: 50,
+    hourHandTailSize: 0,
+    hourHandThickness: 3,
+
+    hourMarkerColor: "black",
+    hourMarkerSize: 8,
+    hourMarkerThickness: 3,
+
+    minuteHandColor: "gray",
+    minuteHandRadius: 6,
+    minuteHandSize: 70,
+    minuteHandTailSize: 8,
+    minuteHandThickness: 3,
+
+    minuteMarkerColor: "gray",
+    minuteMarkerSize: 6,
+    minuteMarkerThickness: 1,
+
+    secondHandColor: "red",
+    secondHandRadius: 4,
+    secondHandSize: 80,
+    secondHandTailSize: 8,
+    secondHandThickness: 1,
 }
 
 const Clock = (props: ClockProps) => {
-    const { offset, width, height, padding } = {
+    const {
+        offset,
+        width,
+        height,
+        padding,
+
+        backgroundColor,
+        borderColor,
+        borderThickness,
+        
+        hourHandColor,
+        hourHandSize,
+        hourHandRadius,
+        hourHandTailSize,
+        hourHandThickness,
+
+        hourMarkerColor,
+        hourMarkerSize,
+        hourMarkerThickness,
+
+        minuteHandColor,
+        minuteHandRadius,
+        minuteHandSize,
+        minuteHandTailSize,
+        minuteHandThickness,
+
+        minuteMarkerColor,
+        minuteMarkerSize,
+        minuteMarkerThickness,
+        
+        secondHandColor,
+        secondHandRadius,
+        secondHandSize,
+        secondHandTailSize,
+        secondHandThickness,
+    } = {
         ...clockDefaultProps,
         ...props
     } as Required<ClockProps>
@@ -30,20 +127,14 @@ const Clock = (props: ClockProps) => {
             ctx.save()
             ctx.rotate(angle)
 
-            ctx.strokeStyle = "black"
-            ctx.lineWidth = 3
+            ctx.strokeStyle = hourMarkerColor
+            ctx.lineWidth = hourMarkerThickness
 
             ctx.beginPath()
             ctx.moveTo(0, -r + padding)
-            ctx.lineTo(0, -r + padding + 10)
+            ctx.lineTo(0, -r + padding + hourMarkerSize)
             ctx.stroke()
             ctx.closePath()
-
-            const text = `${i === 0 ? 12 : i}`
-            const measure = ctx.measureText(`${text}`)
-
-            const textWidth = measure.width
-            const textHeight = measure.fontBoundingBoxAscent - measure.fontBoundingBoxDescent
 
             ctx.restore()
         }
@@ -55,17 +146,21 @@ const Clock = (props: ClockProps) => {
         ctx.save()
 
         ctx.rotate(hoursAngle)
-        ctx.translate(0, 6)
 
-        ctx.strokeStyle = "black"
-        ctx.lineWidth = 3
+        ctx.strokeStyle = hourHandColor
+        ctx.lineWidth = hourHandThickness
 
         ctx.beginPath()
-        ctx.moveTo(0, 0)
-        ctx.lineTo(0, -r/2)
+        ctx.moveTo(0, hourHandTailSize)
+        ctx.lineTo(0, -hourHandSize)
         ctx.stroke()
 
         ctx.restore()
+
+        ctx.moveTo(0, 0)
+        ctx.arc(0, 0, hourHandRadius, 0, 360)
+        ctx.fillStyle = hourHandColor
+        ctx.fill()
     }
 
     const drawMin = (ctx: CanvasRenderingContext2D, r: number) => {
@@ -76,12 +171,12 @@ const Clock = (props: ClockProps) => {
                 ctx.save()
                 ctx.rotate(angle)
     
-                ctx.strokeStyle = "gray"
-                ctx.lineWidth = 2
+                ctx.strokeStyle = minuteMarkerColor
+                ctx.lineWidth = minuteMarkerThickness
     
                 ctx.beginPath()
                 ctx.moveTo(0, -r + padding)
-                ctx.lineTo(0, -r + padding + 8)
+                ctx.lineTo(0, -r + padding + minuteMarkerSize)
                 ctx.stroke()
     
                 ctx.restore()
@@ -93,37 +188,48 @@ const Clock = (props: ClockProps) => {
 
         ctx.save()
         ctx.rotate(minutesAngle)
-        ctx.translate(0, 6)
 
-        ctx.strokeStyle = "black"
-        ctx.lineWidth = 3
+        ctx.strokeStyle = minuteHandColor
+        ctx.lineWidth = minuteHandThickness
 
         ctx.beginPath()
-        ctx.moveTo(0, 0)
-        ctx.lineTo(0, -3*r/4)
+        ctx.moveTo(0, minuteHandTailSize)
+        ctx.lineTo(0, -minuteHandSize)
         ctx.stroke()
 
         ctx.restore()
+
+        ctx.moveTo(0, 0)
+        ctx.arc(0, 0, minuteHandRadius, 0, 360)
+        ctx.fillStyle = minuteHandColor
+        ctx.fill()
     }
 
     const drawSec = (ctx: CanvasRenderingContext2D, r: number) => {
         const seconds = date.getSeconds()
         const secondsAngle = seconds*Math.PI/30
 
-        ctx.save()
-        ctx.rotate(secondsAngle)
-        ctx.translate(0, 6)
-
-        ctx.lineWidth = 1
-        ctx.beginPath()
-
         ctx.moveTo(0, 0)
-        ctx.lineTo(0, -r)
 
-        ctx.strokeStyle = "red"
+        ctx.save()
+
+        ctx.rotate(secondsAngle)
+
+        ctx.lineWidth = secondHandThickness
+        ctx.strokeStyle = secondHandColor
+
+        ctx.beginPath()
+        ctx.moveTo(0, secondHandTailSize)
+        ctx.lineTo(0, -secondHandSize)
+        ctx.closePath()
         ctx.stroke()
 
         ctx.restore()
+
+        ctx.moveTo(0, 0)
+        ctx.arc(0, 0, secondHandRadius, 0, 360)
+        ctx.fillStyle = secondHandColor
+        ctx.fill()
     }
 
     const draw = () => {
@@ -136,24 +242,25 @@ const Clock = (props: ClockProps) => {
 
             ctx.clearRect(0, 0, width, height)
 
-            ctx.beginPath()
-            ctx.arc(centerX, centerY, radius, 0, 360)
-            ctx.fillStyle = "black"
-            ctx.fill()
-            ctx.closePath()
-
-            ctx.beginPath()
-            ctx.arc(centerX, centerY, radius - 2, 0, 360)
-            ctx.fillStyle = "white"
-            ctx.fill()
-            ctx.closePath()
-
             ctx.save()
+
             ctx.translate(centerX, centerY)
 
-            drawSec(ctx, radius)
-            drawMin(ctx, radius)
+            ctx.beginPath()
+            ctx.arc(0, 0, radius, 0, 360)
+            ctx.fillStyle = borderColor
+            ctx.fill()
+            ctx.closePath()
+
+            ctx.beginPath()
+            ctx.arc(0, 0, radius - borderThickness, 0, 360)
+            ctx.fillStyle = backgroundColor
+            ctx.fill()
+            ctx.closePath()
+
             drawHrs(ctx, radius)
+            drawMin(ctx, radius)
+            drawSec(ctx, radius)
 
             ctx.restore()
         }
