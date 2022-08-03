@@ -3,7 +3,7 @@ import {
     createRoot
 } from "react-dom/client"
 
-import Clock from "../lib/react-clock"
+import App from "./app"
 
 createRoot(document.getElementById("app") as HTMLElement)
-    .render(React.createElement(Clock))
+    .render(React.createElement(App))

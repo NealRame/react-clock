@@ -1,7 +1,8 @@
 import * as React from "react"
 
 interface ClockProps {
-    offset?: number,
+    date: Date
+
     size?: number,
 
     backgroundColor?: string,
@@ -37,8 +38,7 @@ interface ClockProps {
     secondHandThickness?: number,
 }
 
-const clockDefaultProps: Required<ClockProps> = {
-    offset: 0,
+const clockDefaultProps: Required<Omit<ClockProps, "date">> = {
     size: 200,
     
     padding: 6,
@@ -301,17 +301,14 @@ const Clock = (props: ClockProps) => {
 
     const drawClock = createClockDrawer(config)
     const update = () => {
-        const date = new Date(Date.now() + 3600000*config.offset)
         if (canvas.current != null) {
             const ctx = canvas.current.getContext("2d")!
-            drawClock(ctx, date)
+            drawClock(ctx, props.date)
         }
     }
 
     React.useEffect(() => {
-        const interval = setInterval(update, 1000)
         update()
-        return () => clearInterval(interval)
     })
 
     return <canvas ref={ canvas } height={ config.size } width={ config.size }/>
