@@ -300,15 +300,17 @@ const Clock = (props: ClockProps) => {
     }
 
     const drawClock = createClockDrawer(config)
+    const update = () => {
+        const date = new Date(Date.now() + 3600000*config.offset)
+        if (canvas.current != null) {
+            const ctx = canvas.current.getContext("2d")!
+            drawClock(ctx, date)
+        }
+    }
 
     React.useEffect(() => {
-        const interval = setInterval(() => {
-            const date = new Date(Date.now() + 3600000*config.offset)
-            if (canvas.current != null) {
-                const ctx = canvas.current.getContext("2d")!
-                drawClock(ctx, date)
-            }
-        }, 1000)
+        const interval = setInterval(update, 1000)
+        update()
         return () => clearInterval(interval)
     })
 
