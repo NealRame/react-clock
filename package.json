@@ -1,5 +1,5 @@
 {
-  "name": "react-clock",
+  "name": "react-nr-clock",
   "version": "0.0.1",
   "description": "A React component that provides an analog clock",
   "private": true,
