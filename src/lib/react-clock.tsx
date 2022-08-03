@@ -53,27 +53,27 @@ const clockDefaultProps: ClockProps = {
     hourHandRadius: 8,
     hourHandSize: 50,
     hourHandTailSize: 0,
-    hourHandThickness: 3,
+    hourHandThickness: 7,
 
     hourMarkerColor: "black",
     hourMarkerSize: 8,
-    hourMarkerThickness: 3,
+    hourMarkerThickness: 5,
 
     minuteHandColor: "gray",
     minuteHandRadius: 6,
     minuteHandSize: 70,
-    minuteHandTailSize: 8,
-    minuteHandThickness: 3,
+    minuteHandTailSize: 0,
+    minuteHandThickness: 5,
 
     minuteMarkerColor: "gray",
     minuteMarkerSize: 6,
-    minuteMarkerThickness: 1,
+    minuteMarkerThickness: 3,
 
     secondHandColor: "red",
     secondHandRadius: 4,
     secondHandSize: 80,
-    secondHandTailSize: 8,
-    secondHandThickness: 1,
+    secondHandTailSize: 10,
+    secondHandThickness: 2,
 }
 
 const Clock = (props: ClockProps) => {
