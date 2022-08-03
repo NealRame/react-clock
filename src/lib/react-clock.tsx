@@ -38,7 +38,7 @@ interface ClockProps {
     secondHandThickness?: number,
 }
 
-const clockDefaultProps: ClockProps = {
+const clockDefaultProps: Required<ClockProps> = {
     offset: 0,
     height: 200,
     width: 200,
@@ -76,51 +76,50 @@ const clockDefaultProps: ClockProps = {
     secondHandThickness: 2,
 }
 
-const Clock = (props: ClockProps) => {
+const createMinuteMarkersDrawer = (props: Required<ClockProps>) => {
     const {
-        offset,
         width,
         height,
-        padding,
-
-        backgroundColor,
-        borderColor,
-        borderThickness,
-        
-        hourHandColor,
-        hourHandSize,
-        hourHandRadius,
-        hourHandTailSize,
-        hourHandThickness,
-
-        hourMarkerColor,
-        hourMarkerSize,
-        hourMarkerThickness,
-
-        minuteHandColor,
-        minuteHandRadius,
-        minuteHandSize,
-        minuteHandTailSize,
-        minuteHandThickness,
-
         minuteMarkerColor,
         minuteMarkerSize,
         minuteMarkerThickness,
-        
-        secondHandColor,
-        secondHandRadius,
-        secondHandSize,
-        secondHandTailSize,
-        secondHandThickness,
-    } = {
-        ...clockDefaultProps,
-        ...props
-    } as Required<ClockProps>
+        padding,
+    } = props
+    const radius = Math.min(width, height)/2
 
-    const [date, setDate] = React.useState(new Date())
-    const canvas = React.useRef<HTMLCanvasElement>(null)
+    return (ctx: CanvasRenderingContext2D) => {
+        for (let i = 0; i < 60; i++) {
+            const angle = i*Math.PI/30
 
-    const drawHrs = (ctx: CanvasRenderingContext2D, r: number) => {
+            if (i % 5 !== 0) {
+                ctx.save()
+                ctx.rotate(angle)
+
+                ctx.strokeStyle = minuteMarkerColor
+                ctx.lineWidth = minuteMarkerThickness
+
+                ctx.beginPath()
+                ctx.moveTo(0, padding - radius)
+                ctx.lineTo(0, padding + minuteMarkerSize - radius)
+                ctx.stroke()
+
+                ctx.restore()
+            }
+        }
+    }
+}
+
+const createHourMarkersDrawer = (props: Required<ClockProps>) => {
+    const {
+        width,
+        height,
+        hourMarkerColor,
+        hourMarkerSize,
+        hourMarkerThickness,
+        padding,
+    } = props
+    const radius = Math.min(width, height)/2
+    return (ctx: CanvasRenderingContext2D) => {
         for (let i = 0; i < 12; i++) {
             const angle = i*Math.PI/6
 
@@ -131,14 +130,25 @@ const Clock = (props: ClockProps) => {
             ctx.lineWidth = hourMarkerThickness
 
             ctx.beginPath()
-            ctx.moveTo(0, -r + padding)
-            ctx.lineTo(0, -r + padding + hourMarkerSize)
+            ctx.moveTo(0, padding - radius)
+            ctx.lineTo(0, padding + hourMarkerSize - radius)
             ctx.stroke()
             ctx.closePath()
 
             ctx.restore()
         }
+    }
+}
 
+const createHourHandDrawer = (props: Required<ClockProps>) => {
+    const {
+        hourHandColor,
+        hourHandSize,
+        hourHandRadius,
+        hourHandTailSize,
+        hourHandThickness,
+    } = props
+    return (ctx: CanvasRenderingContext2D, date: Date) => {
         const hours = date.getHours()
         const minutes = date.getMinutes()
         const hoursAngle = (hours + minutes/60)*Math.PI/6
@@ -164,27 +174,17 @@ const Clock = (props: ClockProps) => {
             ctx.fill()
         }
     }
+}
 
-    const drawMin = (ctx: CanvasRenderingContext2D, r: number) => {
-        for (let i = 0; i < 60; i++) {
-            const angle = i*Math.PI/30
-
-            if (i % 5 !== 0) {
-                ctx.save()
-                ctx.rotate(angle)
-    
-                ctx.strokeStyle = minuteMarkerColor
-                ctx.lineWidth = minuteMarkerThickness
-    
-                ctx.beginPath()
-                ctx.moveTo(0, -r + padding)
-                ctx.lineTo(0, -r + padding + minuteMarkerSize)
-                ctx.stroke()
-    
-                ctx.restore()
-            }
-        }
-
+const createMinuteHandDrawer = (props: Required<ClockProps>) => {
+    const {
+        minuteHandColor,
+        minuteHandRadius,
+        minuteHandSize,
+        minuteHandTailSize,
+        minuteHandThickness,
+    } = props
+    return (ctx: CanvasRenderingContext2D, date: Date) => {
         const minutes = date.getMinutes()
         const minutesAngle = minutes*Math.PI/30
 
@@ -208,8 +208,17 @@ const Clock = (props: ClockProps) => {
             ctx.fill()
         }
     }
+}
 
-    const drawSec = (ctx: CanvasRenderingContext2D, r: number) => {
+const createSecondHandDrawer = (props: Required<ClockProps>) => {
+    const {
+        secondHandColor,
+        secondHandRadius,
+        secondHandSize,
+        secondHandTailSize,
+        secondHandThickness,
+    } = props
+    return (ctx: CanvasRenderingContext2D, date: Date) => {
         const seconds = date.getSeconds()
         const secondsAngle = seconds*Math.PI/30
 
@@ -237,53 +246,80 @@ const Clock = (props: ClockProps) => {
             ctx.fill()
         }
     }
+}
 
-    const draw = () => {
-        if (canvas.current != null) {
-            const ctx = canvas.current.getContext("2d")!
+const createClockDrawer = (props: Required<ClockProps>) => {
+    const {
+        width,
+        height,
+        backgroundColor,
+        borderColor,
+        borderThickness,
+    } = {
+        ...clockDefaultProps,
+        ...props
+    } as Required<ClockProps>
+    const centerX = width/2
+    const centerY = height/2
+    const radius = Math.min(width, height)/2
 
-            const centerX = width/2
-            const centerY = height/2
-            const radius = Math.min(centerX, centerY)
+    const drawHourMarkers = createHourMarkersDrawer(props)
+    const drawHourHand = createHourHandDrawer(props)
+    const drawMinuteMarkers = createMinuteMarkersDrawer(props)
+    const drawMinuteHand = createMinuteHandDrawer(props)
+    const drawSecondHand = createSecondHandDrawer(props)
 
-            ctx.clearRect(0, 0, width, height)
+    return (ctx: CanvasRenderingContext2D, date: Date) => {
+        ctx.clearRect(0, 0, width, height)
 
-            ctx.save()
+        ctx.save()
 
-            ctx.translate(centerX, centerY)
+        ctx.translate(centerX, centerY)
 
-            ctx.beginPath()
-            ctx.arc(0, 0, radius, 0, 360)
-            ctx.fillStyle = borderColor
-            ctx.fill()
-            ctx.closePath()
+        ctx.beginPath()
+        ctx.arc(0, 0, radius, 0, 360)
+        ctx.fillStyle = borderColor
+        ctx.fill()
+        ctx.closePath()
 
-            ctx.beginPath()
-            ctx.arc(0, 0, radius - borderThickness, 0, 360)
-            ctx.fillStyle = backgroundColor
-            ctx.fill()
-            ctx.closePath()
+        ctx.beginPath()
+        ctx.arc(0, 0, radius - borderThickness, 0, 360)
+        ctx.fillStyle = backgroundColor
+        ctx.fill()
+        ctx.closePath()
 
-            drawHrs(ctx, radius)
-            drawMin(ctx, radius)
-            drawSec(ctx, radius)
+        drawHourMarkers(ctx)
+        drawMinuteMarkers(ctx)
 
-            ctx.restore()
-        }
+        drawHourHand(ctx, date)
+        drawMinuteHand(ctx, date)
+        drawSecondHand(ctx, date)
+
+        ctx.restore()
+    }
+}
+
+const Clock = (props: ClockProps) => {
+    const canvas = React.useRef<HTMLCanvasElement>(null)
+    const config = {
+        ...clockDefaultProps,
+        ...props
     }
 
-    React.useEffect(() => {
-        draw()
-    }, [date])
+    const drawClock = createClockDrawer(config)
 
     React.useEffect(() => {
         const interval = setInterval(() => {
-            setDate(new Date(Date.now() + 3600000*offset))
+            const date = new Date(Date.now() + 3600000*config.offset)
+            if (canvas.current != null) {
+                const ctx = canvas.current.getContext("2d")!
+                drawClock(ctx, date)
+            }
         }, 1000)
         return () => clearInterval(interval)
     })
 
-    return <canvas ref={ canvas } height={ height } width={ width }/>
+    return <canvas ref={ canvas } height={ config.height } width={ config.width }/>
 }
 
 export default Clock
