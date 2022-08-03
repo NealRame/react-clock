@@ -157,10 +157,12 @@ const Clock = (props: ClockProps) => {
 
         ctx.restore()
 
-        ctx.moveTo(0, 0)
-        ctx.arc(0, 0, hourHandRadius, 0, 360)
-        ctx.fillStyle = hourHandColor
-        ctx.fill()
+        if (hourHandRadius > 0) {
+            ctx.moveTo(0, 0)
+            ctx.arc(0, 0, hourHandRadius, 0, 360)
+            ctx.fillStyle = hourHandColor
+            ctx.fill()
+        }
     }
 
     const drawMin = (ctx: CanvasRenderingContext2D, r: number) => {
@@ -199,10 +201,12 @@ const Clock = (props: ClockProps) => {
 
         ctx.restore()
 
-        ctx.moveTo(0, 0)
-        ctx.arc(0, 0, minuteHandRadius, 0, 360)
-        ctx.fillStyle = minuteHandColor
-        ctx.fill()
+        if (minuteHandRadius > 0) {
+            ctx.moveTo(0, 0)
+            ctx.arc(0, 0, minuteHandRadius, 0, 360)
+            ctx.fillStyle = minuteHandColor
+            ctx.fill()
+        }
     }
 
     const drawSec = (ctx: CanvasRenderingContext2D, r: number) => {
@@ -226,10 +230,12 @@ const Clock = (props: ClockProps) => {
 
         ctx.restore()
 
-        ctx.moveTo(0, 0)
-        ctx.arc(0, 0, secondHandRadius, 0, 360)
-        ctx.fillStyle = secondHandColor
-        ctx.fill()
+        if (secondHandRadius > 0) {
+            ctx.moveTo(0, 0)
+            ctx.arc(0, 0, secondHandRadius, 0, 360)
+            ctx.fillStyle = secondHandColor
+            ctx.fill()
+        }
     }
 
     const draw = () => {
