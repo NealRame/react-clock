@@ -2,8 +2,7 @@ import * as React from "react"
 
 interface ClockProps {
     offset?: number,
-    width?: number,
-    height?: number,
+    size?: number,
 
     backgroundColor?: string,
     borderColor?: string,
@@ -40,8 +39,7 @@ interface ClockProps {
 
 const clockDefaultProps: Required<ClockProps> = {
     offset: 0,
-    height: 200,
-    width: 200,
+    size: 200,
     
     padding: 6,
     
@@ -78,14 +76,13 @@ const clockDefaultProps: Required<ClockProps> = {
 
 const createMinuteMarkersDrawer = (props: Required<ClockProps>) => {
     const {
-        width,
-        height,
+        size,
         minuteMarkerColor,
         minuteMarkerSize,
         minuteMarkerThickness,
         padding,
     } = props
-    const radius = Math.min(width, height)/2
+    const radius = size/2
 
     return (ctx: CanvasRenderingContext2D) => {
         for (let i = 0; i < 60; i++) {
@@ -111,14 +108,13 @@ const createMinuteMarkersDrawer = (props: Required<ClockProps>) => {
 
 const createHourMarkersDrawer = (props: Required<ClockProps>) => {
     const {
-        width,
-        height,
+        size,
         hourMarkerColor,
         hourMarkerSize,
         hourMarkerThickness,
         padding,
     } = props
-    const radius = Math.min(width, height)/2
+    const radius = size/2
     return (ctx: CanvasRenderingContext2D) => {
         for (let i = 0; i < 12; i++) {
             const angle = i*Math.PI/6
@@ -250,8 +246,7 @@ const createSecondHandDrawer = (props: Required<ClockProps>) => {
 
 const createClockDrawer = (props: Required<ClockProps>) => {
     const {
-        width,
-        height,
+        size,
         backgroundColor,
         borderColor,
         borderThickness,
@@ -259,9 +254,7 @@ const createClockDrawer = (props: Required<ClockProps>) => {
         ...clockDefaultProps,
         ...props
     } as Required<ClockProps>
-    const centerX = width/2
-    const centerY = height/2
-    const radius = Math.min(width, height)/2
+    const radius = size/2
 
     const drawHourMarkers = createHourMarkersDrawer(props)
     const drawHourHand = createHourHandDrawer(props)
@@ -270,11 +263,11 @@ const createClockDrawer = (props: Required<ClockProps>) => {
     const drawSecondHand = createSecondHandDrawer(props)
 
     return (ctx: CanvasRenderingContext2D, date: Date) => {
-        ctx.clearRect(0, 0, width, height)
+        ctx.clearRect(0, 0, size, size)
 
         ctx.save()
 
-        ctx.translate(centerX, centerY)
+        ctx.translate(radius, radius)
 
         ctx.beginPath()
         ctx.arc(0, 0, radius, 0, 360)
@@ -319,7 +312,7 @@ const Clock = (props: ClockProps) => {
         return () => clearInterval(interval)
     })
 
-    return <canvas ref={ canvas } height={ config.height } width={ config.width }/>
+    return <canvas ref={ canvas } height={ config.size } width={ config.size }/>
 }
 
 export default Clock
