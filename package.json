@@ -8,7 +8,7 @@
     "dev": "webpack serve --config ./src/app/webpack.config.js"
   },
   "author": "Julien Graziano <julien@graziano.fr>",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
