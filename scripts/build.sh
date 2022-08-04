@@ -28,3 +28,6 @@ delete package_json.scripts
 
 fs.writeFileSync("$BUILD_OUTPUT_DIR/package.json", JSON.stringify(package_json, null, 2))
 EOF
+
+cp "$SOURCE_DIR/README.md" "$BUILD_OUTPUT_DIR"
+cp "$SOURCE_DIR/LICENSE" "$BUILD_OUTPUT_DIR"
