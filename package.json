@@ -5,8 +5,6 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && tsc --project src/lib/react-clock --outDir ./dist && cp package.json ./dist",
-    "clean": "rm -rf ./dist",
     "dev": "webpack serve --config ./src/app/webpack.config.js"
   },
   "author": "Julien Graziano <julien@graziano.fr>",
