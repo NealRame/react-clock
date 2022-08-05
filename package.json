@@ -1,5 +1,5 @@
 {
-  "name": "@neal-rame/react-clock",
+  "name": "@nealrame/react-clock",
   "version": "0.1.0",
   "description": "An analog clock for your React application.",
   "private": true,
