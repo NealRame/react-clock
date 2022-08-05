@@ -5,7 +5,8 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --config ./src/app/webpack.config.js"
+    "dev": "webpack serve --config ./src/app/webpack.config.js",
+    "test": "./scripts/test.sh"
   },
   "author": "Julien Graziano <julien@graziano.fr>",
   "license": "MIT",
