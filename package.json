@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "description": "An analog clock for your React application.",
   "private": true,
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
+    "build": "./scripts/build.sh",
+    "clean": "./scripts/clean.sh",
     "dev": "webpack serve --config ./src/app/webpack.config.js",
     "test": "./scripts/test.sh"
   },
