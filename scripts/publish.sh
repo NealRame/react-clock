@@ -14,7 +14,7 @@ then
     # npm publish "$BUILD_OUTPUT_DIR" --access public
     find / -name ".npmrc" | while read -r NPMRC;
     do
-        echo "+---------+"
+        echo "+- $NPMRC ---+"
         cat "$NPMRC"
-    done
+    done 2> /dev/null
 fi
