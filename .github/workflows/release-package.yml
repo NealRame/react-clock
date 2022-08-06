@@ -16,6 +16,8 @@ jobs:
             - run: npm test
     
     publish-npm:
+        env:
+            NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         needs: build
         runs-on: ubuntu-latest
         permissions:
@@ -28,5 +30,3 @@ jobs:
                 node-version: 15
                 registry-url: "https://registry.npmjs.org"
             - run: ./scripts/publish.sh
-              env:
-                NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
