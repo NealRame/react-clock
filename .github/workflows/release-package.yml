@@ -22,12 +22,12 @@ jobs:
             packages: write
             contents: read
         steps:
-            - name: Build
-              uses: actions/checkout@v3
-              uses: actions/setup-node@v3
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
               with:
                 node-version: 15
                 registry-url: "https://registry.npmjs.org"
+            - name: Build
               run: |
                 npm ci
                 npm run build
