@@ -17,6 +17,8 @@ tsc \
     --outDir "$BUILD_OUTPUT_DIR" \
     --project "$SOURCE_DIR/src/lib/react-clock"
 
+pushd "$BUILD_OUTPUT_DIR"
+
 node <<EOF
 const fs = require("fs")
 
@@ -26,8 +28,10 @@ delete package_json.devDependencies
 delete package_json.private
 delete package_json.scripts
 
-fs.writeFileSync("$BUILD_OUTPUT_DIR/package.json", JSON.stringify(package_json, null, 2))
+fs.writeFileSync("package.json", JSON.stringify(package_json, null, 2))
 EOF
 
-cp "$SOURCE_DIR/README.md" "$BUILD_OUTPUT_DIR"
-cp "$SOURCE_DIR/LICENSE" "$BUILD_OUTPUT_DIR"
+cp "$SOURCE_DIR/README.md" .
+cp "$SOURCE_DIR/LICENSE" .
+
+popd
