@@ -15,7 +15,7 @@ jobs:
             - run: npm ci
             - run: npm test
     
-    publish-gpr:
+    publish-npm:
         needs: build
         runs-on: ubuntu-latest
         permissions:
@@ -27,7 +27,6 @@ jobs:
               with:
                 node-version: 15
                 registry-url: "https://registry.npmjs.org"
-            - run: ./scripts/build.sh
             - run: ./scripts/publish.sh
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
