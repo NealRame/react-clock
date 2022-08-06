@@ -7,7 +7,7 @@ set -u
 export SOURCE_DIR="${SOURCE_DIR:-$PWD}"
 
 # shellcheck source=scripts/env.sh
-source "$SOURCE_DIR/scripts/env.sh"
+source "$SOURCE_DIR/scripts/build.sh"
 
 if [ -d "$BUILD_OUTPUT_DIR" ];
 then
