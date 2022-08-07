@@ -55,6 +55,17 @@ const app = () => {
 <p align="center"><img src="./docs/images/background_color.png"/></p>
 
 ### borderColor
+Use this property to change the border color of the clock. Accept a string
+parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)> value.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock date={ new Date() } borderColor={ "#a56ef9" } />
+}
+```
+
+<p align="center"><img src="./docs/images/border_color.png"/></p>
 
 ### borderThickness
 
