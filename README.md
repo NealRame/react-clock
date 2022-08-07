@@ -206,7 +206,7 @@ const app = () => {
 
 ### hourMarkerColor
 ### minuteMarkerColor
-Use this property to change the color of respectively hour, minute markers.
+Use this property to change the color of respectively hour and minute markers.
 Accept a string parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)> value.
 
 #### example
@@ -224,7 +224,34 @@ const app = () => {
 
 ### hourMarkerSize
 ### minuteMarkerSize
+Use this property to change the size of respectively hour and minute markers.
+Accept number.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        hourMarkerSize={ 16 }
+        minuteMarkerSize={ 10 }
+    />
+}
+```
+
+<p align="center"><img src="./docs/images/markers_size.png"/></p>
 
 ### hourMarkerThickness
 ### minuteMarkerThickness
+Use this property to change the thickness of respectively hour and minute
+markers. Accept number.
 
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        hourMarkerThickness={ 2 }
+        minuteMarkerThickness={ 1 }
+    />
+}
+```
