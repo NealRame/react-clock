@@ -2,9 +2,6 @@ name: Node.js Package
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'The updated registry version number.'
 
 jobs:
     test:
@@ -17,7 +14,7 @@ jobs:
             - run: npm ci
             - run: npm test
     
-    publish:
+    publish-npm:
         needs: test
         runs-on: ubuntu-latest
         steps:
@@ -26,17 +23,9 @@ jobs:
               with:
                 node-version: 15
                 registry-url: "https://registry.npmjs.org"
-            - name: Build
+                scope: "@nealrame"
             - run: npm ci
             - run: npm run build
-            
-            # publish to NPMJS registry
-            - uses: actions/setup-node@v3
-              with:
-                node-version: 15
-                registry-url: "https://registry.npmjs.org"
-                scope: '@nealrame'
-            - name: Publish to NPM
             - run: npm publish --access public
               env:
                 NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
