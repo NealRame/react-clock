@@ -91,6 +91,21 @@ const app = () => {
 
 ### padding
 
+Use this property to change the padding between border and marks of the clock.
+Accept a number.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        padding={ 16 }
+    />
+}
+```
+
+<p align="center"><img src="./docs/images/padding.png"/></p>
+
 ### hourHandColor
 
 ### hourHandRadius
