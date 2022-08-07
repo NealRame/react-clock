@@ -90,7 +90,6 @@ const app = () => {
 <p align="center"><img src="./docs/images/border_thickness.png"/></p>
 
 ### padding
-
 Use this property to change the padding between border and marks of the clock.
 Accept a number.
 
@@ -107,6 +106,20 @@ const app = () => {
 <p align="center"><img src="./docs/images/padding.png"/></p>
 
 ### hourHandColor
+Use this property to change the color of the hour hand. Accept a string
+parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)> value.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        hourHandColor={ "#02b701" }
+    />
+}
+```
+
+<p align="center"><img src="./docs/images/hour_hand_color.png"/></p>
 
 ### hourHandRadius
 
