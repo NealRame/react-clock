@@ -5,7 +5,7 @@ An analog clock for your [_React_](https://reactjs.org) application.
 ## Installation
 
 ```sh
-> npm install @neal-rame/react-clock
+> npm install @nealrame/react-clock
 ```
 
 ## Usage
