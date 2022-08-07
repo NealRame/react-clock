@@ -6,10 +6,6 @@ name: Node.js Package
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: "The registry version number."
-        required: true
 
 jobs:
     test:
