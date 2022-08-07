@@ -33,6 +33,16 @@ const app = () => {
 
 ### size
 
+Use this property to change the size of the clock.
+
+#### example
+
+```jsx
+const app = () => {
+    return <Clock date={ new Date() } size={ 200 } />
+}
+```
+
 ### backgroundColor
 
 ### borderColor
