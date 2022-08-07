@@ -24,6 +24,7 @@ jobs:
                 node-version: 15
                 registry-url: "https://registry.npmjs.org"
                 scope: "@nealrame"
+                always-auth: true
             - run: npm ci
             - run: npm run build
             - run: npm publish --access public
