@@ -122,6 +122,19 @@ const app = () => {
 <p align="center"><img src="./docs/images/hour_hand_color.png"/></p>
 
 ### hourHandRadius
+Use this property to change the radius of the hour hand. Accept a number.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        hourHandRadius={ 16 }
+    />
+}
+```
+
+<p align="center"><img src="./docs/images/hour_hand_radius.png"/></p>
 
 ### hourHandSize
 
