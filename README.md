@@ -165,6 +165,24 @@ const app = () => {
 <p align="center"><img src="./docs/images/hand_size.png"/></p>
 
 ### hourHandTailSize
+### minuteHandTailSize
+### secondHandTailSize
+Use this property to change the size of the tail of respectivelty hour, minute
+and hand. Accept a number.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        hourHandTailSize={ 16 }
+        minuteHandTailSize={ 16 }
+        secondHandTailSize={ 16 }
+    />
+}
+```
+
+<p align="center"><img src="./docs/images/tail_size.png"/></p>
 
 ### hourHandThickness
 
@@ -174,8 +192,6 @@ const app = () => {
 
 ### hourMarkerThickness
 
-### minuteHandTailSize
-
 ### minuteHandThickness
 
 ### minuteMarkerColor
@@ -183,7 +199,5 @@ const app = () => {
 ### minuteMarkerSize
 
 ### minuteMarkerThickness
-
-### secondHandTailSize
 
 ### secondHandThickness
