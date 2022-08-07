@@ -206,6 +206,21 @@ const app = () => {
 
 ### hourMarkerColor
 ### minuteMarkerColor
+Use this property to change the color of respectively hour, minute markers.
+Accept a string parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)> value.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        hourMarkerColor={ "#a56ef9" }
+        minuteMarkerColor={ "#01aaba" }
+    />
+}
+```
+
+<p align="center"><img src="./docs/images/markers_color.png"/></p>
 
 ### hourMarkerSize
 ### minuteMarkerSize
