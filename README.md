@@ -106,8 +106,10 @@ const app = () => {
 <p align="center"><img src="./docs/images/padding.png"/></p>
 
 ### hourHandColor
-Use this property to change the color of the hour hand. Accept a string
-parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)> value.
+### minuteHandColor
+### secondHandColor
+Use this properties to change the color of respectively hour, minute and
+second hand. Accept a string parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)> value.
 
 #### example
 ```jsx
@@ -115,14 +117,19 @@ const app = () => {
     return <Clock
         date={ date }
         hourHandColor={ "#02b701" }
+        minuteHandColor={ "#a56ef9" }
+        secondHandColor={ "#37a1ff" }
     />
 }
 ```
 
-<p align="center"><img src="./docs/images/hour_hand_color.png"/></p>
+<p align="center"><img src="./docs/images/hand_color.png"/></p>
 
 ### hourHandRadius
-Use this property to change the radius of the hour hand. Accept a number.
+### minuteHandRadius
+### secondHandRadius
+Use this properties to change the radius of respectively hour, minute and
+second hand. Accept number.
 
 #### example
 ```jsx
@@ -130,13 +137,32 @@ const app = () => {
     return <Clock
         date={ date }
         hourHandRadius={ 16 }
+        minuteHandRadius={ 16 }
+        secondHandRadius={ 16 }
     />
 }
 ```
 
-<p align="center"><img src="./docs/images/hour_hand_radius.png"/></p>
+<p align="center"><img src="./docs/images/hand_radius.png"/></p>
 
 ### hourHandSize
+### minuteHandSize
+### secondHandSize
+Use this property to change the size of the hour hand. Accept a number.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        hourHandSize={ 40 }
+        minuteHandSize={ 64 }
+        secondHandSize={ 72 }
+    />
+}
+```
+
+<p align="center"><img src="./docs/images/hand_size.png"/></p>
 
 ### hourHandTailSize
 
@@ -148,12 +174,6 @@ const app = () => {
 
 ### hourMarkerThickness
 
-### minuteHandColor
-
-### minuteHandRadius
-
-### minuteHandSize
-
 ### minuteHandTailSize
 
 ### minuteHandThickness
@@ -163,12 +183,6 @@ const app = () => {
 ### minuteMarkerSize
 
 ### minuteMarkerThickness
-
-### secondHandColor
-
-### secondHandRadius
-
-### secondHandSize
 
 ### secondHandTailSize
 
