@@ -32,11 +32,9 @@ const app = () => {
 ## Customization
 
 ### size
-
 Use this property to change the size of the clock.
 
 #### example
-
 ```jsx
 const app = () => {
     return <Clock date={ new Date() } size={ 200 } />
@@ -44,6 +42,17 @@ const app = () => {
 ```
 
 ### backgroundColor
+Use this property to change the background color of the clock. Accept a string
+parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value)> value.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock date={ new Date() } backgroundColor={ "#fddd9c" } />
+}
+```
+
+<p align="center"><img src="./docs/images/background_color.png"/></p>
 
 ### borderColor
 
