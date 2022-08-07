@@ -19,7 +19,6 @@ tsc \
 if [ -n "${NODE_AUTH_TOKEN:-}" ];
 then
     cat > ".npmrc" <<EOF
-@nealrame:registry=https://registry.npmjs.org
 //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
 EOF
 fi
