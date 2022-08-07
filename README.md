@@ -48,7 +48,10 @@ parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_va
 #### example
 ```jsx
 const app = () => {
-    return <Clock date={ new Date() } backgroundColor={ "#fddd9c" } />
+    return <Clock
+        date={ new Date() }
+        backgroundColor={ "#fddd9c" }
+    />
 }
 ```
 
@@ -61,13 +64,30 @@ parsed as CSS <[color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_va
 #### example
 ```jsx
 const app = () => {
-    return <Clock date={ new Date() } borderColor={ "#a56ef9" } />
+    return <Clock
+        date={ new Date() }
+        borderColor={ "#a56ef9" }
+    />
 }
 ```
 
 <p align="center"><img src="./docs/images/border_color.png"/></p>
 
 ### borderThickness
+Use this property to change the border thickness of the clock. Accept a number.
+
+#### example
+```jsx
+const app = () => {
+    return <Clock
+        date={ date }
+        borderColor={ "#bbb" }
+        borderThickness={ 18 }
+    />
+}
+```
+
+<p align="center"><img src="./docs/images/border_thickness.png"/></p>
 
 ### padding
 
