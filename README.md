@@ -255,3 +255,5 @@ const app = () => {
     />
 }
 ```
+
+<p align="center"><img src="./docs/images/markers_thickness.png"/></p>
