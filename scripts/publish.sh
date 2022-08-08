@@ -11,10 +11,12 @@ source "$SOURCE_DIR/scripts/env.sh"
 
 pushd "$BUILD_OUTPUT_DIR"
 
-npm publish --access public
+echo "$PWD"
 
 echo "---"
 cat .npmrc
 echo "---"
+
+npm publish --access public
 
 popd
