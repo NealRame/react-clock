@@ -13,4 +13,8 @@ pushd "$BUILD_OUTPUT_DIR"
 
 npm publish --access public
 
+echo "---"
+cat .npmrc
+echo "---"
+
 popd
