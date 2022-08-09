@@ -20,9 +20,15 @@ pushd "$BUILD_OUTPUT_DIR"
 cp "$SOURCE_DIR/LICENSE" .
 cp "$SOURCE_DIR/README.md" .
 
-cat > .npmrc <<EOF
+node<<EOF
+const fs = require("fs")
+
+const npmrc_content = \`
 @nealrame:registry: https://registry.npmjs.org
-//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+//registry.npmjs.org/:_authToken=\${process.env.NODE_AUTH_TOKEN}
+\`
+
+fs.writeFileSync(".npmrc", npmrc_content)
 EOF
 
 node <<EOF

@@ -11,12 +11,13 @@ source "$SOURCE_DIR/scripts/env.sh"
 
 pushd "$BUILD_OUTPUT_DIR"
 
-echo "$PWD"
+
+# display the 8 last characters from the standard input stream
 
 echo "---"
-grep "XXXXX-XXXXX-XXXXX-XXXXX" .npmrc
+grep _authToken .npmrc | tail -c8
 echo "---"
 
-npm publish --access public
+# npm publish --access public
 
 popd
