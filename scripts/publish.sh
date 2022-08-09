@@ -14,9 +14,13 @@ pushd "$BUILD_OUTPUT_DIR"
 
 # display the 8 last characters from the standard input stream
 
-echo "---"
-grep _authToken .npmrc | tail -c8
-echo "---"
+
+
+if [ "$(grep _authToken .npmrc | tail -c8)" = "w3EHLwi" ]; then
+    echo "Authentication token is valid"
+    exit 1
+fi
+
 
 # npm publish --access public
 
