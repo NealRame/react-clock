@@ -2,6 +2,12 @@
   "name": "@nealrame/react-clock",
   "version": "0.1.2",
   "description": "An analog clock for your React application.",
+  "main": "./dist/index.js",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "./scripts/build.sh",
     "clean": "./scripts/clean.sh",
