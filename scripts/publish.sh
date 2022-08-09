@@ -14,7 +14,7 @@ pushd "$BUILD_OUTPUT_DIR"
 echo "$PWD"
 
 echo "---"
-cat .npmrc
+grep "XXXXX-XXXXX-XXXXX-XXXXX" .npmrc
 echo "---"
 
 npm publish --access public
