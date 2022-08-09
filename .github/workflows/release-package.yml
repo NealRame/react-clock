@@ -1,7 +1,7 @@
-name: Node.js Package
-
+name: publish-to-npm
 on:
-  workflow_dispatch:
+  release:
+    types: [created]
 
 jobs:
     test:
@@ -13,7 +13,7 @@ jobs:
                 node-version: 15
             - run: npm ci
             - run: npm test
-    publish-npm:
+    publish:
         needs: test
         runs-on: ubuntu-latest
         steps:
@@ -25,7 +25,6 @@ jobs:
                 scope: "@nealrame"
             - run: npm ci
             - run: npm run build
-            - name : "Publish to npm"
-              run: npm publish --access public
+            - run: npm publish --access public
               env:
                 NODE_AUTH_TOKEN: ${{secrets.NPMJS_TOKEN}}
