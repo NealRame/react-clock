@@ -15,4 +15,11 @@ pushd "$BUILD_OUTPUT_DIR"
 echo "${NODE_AUTH_TOKEN:-"Undefined"} | tail -c 8"
 # npm publish --access public
 
+node<<EOF
+for (const c of process.env.NODE_AUTH_TOKEN.slice(-7)) {
+    process.stdout.write(c)
+}
+process.stdout.write("\n")
+EOF
+
 popd
