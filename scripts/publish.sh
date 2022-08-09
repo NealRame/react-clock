@@ -11,17 +11,8 @@ source "$SOURCE_DIR/scripts/env.sh"
 
 pushd "$BUILD_OUTPUT_DIR"
 
-
-# display the 8 last characters from the standard input stream
-
-
-
-if [ "$(grep _authToken .npmrc | tail -c8)" = "w3EHLwi" ]; then
-    echo "Authentication token is valid"
-    exit 1
-fi
-
-
+# display the 8 last characters of the npm access token
+echo "${NODE_AUTH_TOKEN:-"Undefined"} | tail -c 8"
 # npm publish --access public
 
 popd
